@@ -42,5 +42,19 @@
             }
         }
     },
+    "themes/theme-provider": {
+        "name": "themes/theme-provider",
+        "scope": "",
+        "version": "",
+        "defaultScope": "sushantdsuwal.com",
+        "mainFile": "index.ts",
+        "rootDir": "com/themes/theme-provider",
+        "config": {
+            "sushantdsuwal.com/envs/rn-env": {},
+            "teambit.envs/envs": {
+                "env": "sushantdsuwal.com/envs/rn-env"
+            }
+        }
+    },
     "$schema-version": "17.0.0"
 }

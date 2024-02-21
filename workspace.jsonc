@@ -61,7 +61,8 @@
         "@teambit/preview.react-preview": "^1.0.23",
         "@teambit/react.mounter": "^1.0.3",
         "@teambit/react.react-native-env": "^1.0.36",
-        "@teambit/typescript.typescript-compiler": "^2.0.16"
+        "@teambit/typescript.typescript-compiler": "^2.0.16",
+        "@testing-library/react-native": "^12.4.3"
       },
       "peerDependencies": {}
     },
