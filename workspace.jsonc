@@ -39,7 +39,7 @@
   **/
   "teambit.generator/generator": {
     "envs": [
-      "sushantdsuwal.com/envs/my-react-native-env"
+      "sushantdsuwal.com/envs/rn-env"
     ]
   },
   /**

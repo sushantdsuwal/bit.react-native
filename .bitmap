@@ -9,13 +9,13 @@
  */
 
 {
-    "envs/my-react-native-env": {
-        "name": "envs/my-react-native-env",
+    "envs/rn-env": {
+        "name": "envs/rn-env",
         "scope": "",
         "version": "",
         "defaultScope": "sushantdsuwal.com",
         "mainFile": "index.ts",
-        "rootDir": "com/envs/my-react-native-env",
+        "rootDir": "com/envs/rn-env",
         "config": {
             "teambit.dependencies/dependency-resolver": {
                 "policy": {

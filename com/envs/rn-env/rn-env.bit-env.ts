@@ -23,9 +23,9 @@ import { ConfigWriterList } from '@teambit/workspace-config-files';
 import hostDependencies from './preview/host-dependencies';
 import { webpackTransformer } from './config/webpack.config';
 
-export class MyReactNativeEnv extends ReactNativeEnv {
+export class RnEnv extends ReactNativeEnv {
   /* a shorthand name for the env */
-  name = 'my-react-native-env';
+  name = 'rn-env';
 
   protected tsconfigPath = require.resolve('./config/tsconfig.json');
   
@@ -158,4 +158,4 @@ export class MyReactNativeEnv extends ReactNativeEnv {
   }
 }
 
-export default new MyReactNativeEnv();
+export default new RnEnv();
