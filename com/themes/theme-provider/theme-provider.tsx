@@ -1,65 +1,82 @@
-import React, { createContext, useContext, useState } from 'react';
+
+import React from 'react';
+import { useState, createContext, useContext } from 'react';
+import { useColorScheme } from 'react-native';
+
+export type ThemeColorScheme = 'light' | 'dark' | 'auto';
+export const themeOptions = ['auto', 'light', 'dark'] as const;
+
 
 type ColorPalette = {
   background: string;
   text: string;
 };
 
-type Theme = {
-  dark: ColorPalette;
-  light: ColorPalette;
-};
 
-const defaultTheme: Theme = {
-  dark: {
+const darkTheme: ColorPalette = {
     background: '#121212',
     text: '#ffffff',
-  },
-  light: {
-    background: '#ffffff',
-    text: '#000000',
-  },
 };
 
-const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void }>({
-  theme: defaultTheme,
-  toggleTheme: () => {},
-});
+const lightTheme: ColorPalette = {
+    background: '#121212',
+    text: '#ffffff',
+};
+
+
+interface ThemeContextProps {
+  colorScheme: ThemeColorScheme;
+  setColorScheme: (theme: ThemeColorScheme) => void;
+  theme: ColorPalette;
+}
+
+export const ThemeContext = createContext<ThemeContextProps | undefined>(
+  undefined,
+);
+
+const themeOption = { dark: darkTheme, light: lightTheme };
+
 
 export type ThemeProviderProps = {
    children: React.ReactNode
 };
 
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState(defaultTheme);
+export  function ThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [theme, setColorScheme] = useState<ThemeColorScheme>('dark');
+  const colorScheme = useColorScheme();
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => ({
-      ...prevTheme,
-      dark: {
-        ...prevTheme.dark,
-        background: prevTheme.light.background,
-        text: prevTheme.light.text,
-      },
-      light: {
-        ...prevTheme.light,
-        background: prevTheme.dark.background,
-        text: prevTheme.dark.text,
-      },
-    }));
+  const onChangeTheme = (themeColorScheme: ThemeColorScheme) => {
+    setColorScheme(themeColorScheme);
+  };
+
+  const currentTheme = {
+    ...themeOption,
+    auto: (colorScheme && themeOption[colorScheme]) ?? darkTheme,
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+    <ThemeContext.Provider
+      value={{
+        colorScheme: theme,
+        setColorScheme: onChangeTheme,
+        theme: currentTheme[theme],
+      }}
+    >
+        {children}
     </ThemeContext.Provider>
   );
-};
+}
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
+
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return context;
+
+  return { ...context };
 };
